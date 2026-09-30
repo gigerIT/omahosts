@@ -13,7 +13,7 @@ Panel {
   ipcTarget: "gigerit.omahosts"
 
   readonly property string helper: decodeURIComponent(Qt.resolvedUrl("hosts.py").toString().replace(/^file:\/\//, ""))
-  readonly property string hostsIcon: "\u{f01d6}"
+  readonly property string hostsIcon: "\uf0ac"
   property var entries: []
   property string revision: ""
   property string error: ""
