@@ -4,6 +4,8 @@ Manage local hosts entries from the Omarchy top bar. Search, add, edit, delete, 
 
 omahosts follows your Omarchy theme and uses its native popup, controls, keyboard navigation, and authentication dialog. It edits `/etc/hosts`, including existing mappings and commented-out entries. Each row is one IP address and one or more hostnames; switching a row toggles all its hostnames together.
 
+![The omahosts entry editor in an Omarchy popup](preview.png)
+
 ## Install
 
 Requires Omarchy 4.0.4 or newer with the Quickshell shell, Python 3, and Polkit. These dependencies are included in the tested Omarchy installation.
@@ -74,7 +76,7 @@ python3 -B -m unittest discover -s tests -v
 omarchy plugin validate .
 ```
 
-Tests use temporary files and never modify the machine's hosts file. They cover preservation, input validation, localhost protection, stale and concurrent writes, backup retention, permissions, and failure handling.
+Tests use temporary files and never modify the machine's hosts file. They cover preservation, input validation, localhost protection, stale and concurrent writes, backup retention, permissions, and failure handling. When Bubblewrap and unprivileged user namespaces are available, an additional test runs the real privileged CLI as root inside a disposable namespace with isolated `/etc`, `/run`, and `/var` directories.
 
 For initial local testing before publication:
 
@@ -85,5 +87,7 @@ omarchy plugin enable gigerit.omahosts --after omarchy.network
 ```
 
 After publication, set the installed checkout's origin to `https://github.com/gigerit/omahosts.git` so `omarchy plugin update` follows the published repository. The development checkout can use the SSH remote.
+
+If QML changes remain cached after `omarchy-shell shell rescanPlugins`, use `omarchy restart shell` to load a fresh copy.
 
 Use the installed `qs.Ui` controls and `qs.Commons` theme tokens. Verify visual changes in the running shell, including keyboard focus and authentication cancellation. Do not edit packaged Omarchy files. The privileged CLI accepts only `read`, `check`, and `apply`, with fixed system paths; tests pass temporary paths to the Python functions directly. Keep test-only path overrides out of the privileged CLI.
