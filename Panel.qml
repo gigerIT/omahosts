@@ -30,6 +30,7 @@ Panel {
   property int selectedAction: 0
   property bool restorePopup: false
   readonly property bool busy: saving || checkProcess.running
+  readonly property int customCount: entries.filter(function(e) { return !e.protected }).length
   readonly property int activeCount: entries.filter(function(e) { return e.enabled && !e.protected }).length
   readonly property var filteredEntries: entries.filter(function(e) {
     var query = search.text.trim().toLowerCase()
@@ -254,7 +255,7 @@ Panel {
     owner: root
     bar: root.bar
     open: root.opened
-    focusTarget: keyCatcher
+    focusTarget: root.editing ? addressInput : keyCatcher
     contentWidth: fittedContentWidth(Style.space(480))
     contentHeight: fittedContentHeight(Math.max(Style.space(250), column.implicitHeight))
 
@@ -287,7 +288,7 @@ Panel {
         PanelHero {
           Layout.fillWidth: true
           title: root.editing ? (root.editId < 0 ? "New entry" : "Edit entry") : "omahosts"
-          meta: root.busy ? "Saving…" : root.activeCount + " active · " + root.entries.filter(function(e) { return !e.protected }).length + " custom entries"
+          meta: root.busy ? "Saving…" : root.activeCount + " active · " + root.customCount + (root.customCount === 1 ? " custom entry" : " custom entries")
           iconComponent: Label { text: root.hostsIcon; font.pixelSize: Style.font.display }
           trailingControl: PanelActionButton {
             iconText: "\uf00d"

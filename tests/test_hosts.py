@@ -140,6 +140,11 @@ class FileTests(unittest.TestCase):
     self.assertEqual(self.path.stat().st_ino, inode)
     self.assertFalse(self.backups.exists())
 
+  def test_extended_attributes_survive_replacement(self):
+    os.setxattr(self.path, "user.omahosts-test", b"keep")
+    self.save(request(FIXTURE, enabled=False))
+    self.assertEqual(os.getxattr(self.path, "user.omahosts-test"), b"keep")
+
   def test_stale_snapshot_leaves_file_and_backups_untouched(self):
     self.path.write_bytes(FIXTURE + b"\n# external edit\n")
     with self.assertRaisesRegex(hosts.HostsError, "changed"):
@@ -225,6 +230,12 @@ class FileTests(unittest.TestCase):
       self.assertEqual(process.exitcode, 0)
     self.assertEqual(sorted([results.get(timeout=1), results.get(timeout=1)]), ["conflict", "ok"])
     self.assertIn(self.path.read_bytes(), [hosts.transform(FIXTURE, change) for change in changes])
+
+  def test_symlinked_lock_is_refused_without_changing_target(self):
+    self.lock.symlink_to(self.path)
+    with self.assertRaises(OSError):
+      self.save(request(FIXTURE, enabled=False))
+    self.assertEqual(self.path.read_bytes(), FIXTURE)
 
 
 class CliTests(unittest.TestCase):
