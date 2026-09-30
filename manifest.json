@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "gigerit.omahosts",
+  "name": "omahosts",
+  "version": "0.1.0",
+  "author": "gigerit",
+  "description": "Manage local hosts entries from the Omarchy bar",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "Panel.qml" },
+  "barWidget": {
+    "displayName": "omahosts",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
