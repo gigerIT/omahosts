@@ -276,7 +276,7 @@ Panel {
       onTextKey: function(text) {
         if (text === "/") search.forceActiveFocus()
         else if (text === "a") root.beginEdit(null)
-        else if (text === "e") root.beginEdit(root.filteredEntries[root.selectedIndex])
+        else if (text === "e" && root.selectedIndex >= 0) root.beginEdit(root.filteredEntries[root.selectedIndex])
         else if (text === "r") root.refresh()
       }
 
