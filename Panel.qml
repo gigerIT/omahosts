@@ -235,8 +235,7 @@ Panel {
     anchors.fill: parent
     bar: root.bar
     text: root.hostsIcon
-    active: root.activeCount > 0
-    activeColor: Color.accent
+    // Match neighboring status icons; show activity in the tooltip.
     tooltipText: "omahosts · " + root.activeCount + " active"
     onPressed: root.toggle()
   }
