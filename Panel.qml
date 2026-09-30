@@ -33,6 +33,7 @@ Panel {
   readonly property int customCount: entries.filter(function(e) { return !e.protected }).length
   readonly property int activeCount: entries.filter(function(e) { return e.enabled && !e.protected }).length
   readonly property var filteredEntries: entries.filter(function(e) {
+    if (e.protected) return false
     var query = search.text.trim().toLowerCase()
     return !query || (e.address + " " + e.hosts.join(" ") + " " + e.comment).toLowerCase().indexOf(query) !== -1
   })
@@ -380,7 +381,7 @@ Panel {
                 }
                 Label {
                   Layout.fillWidth: true
-                  text: row.modelData.address + (row.modelData.protected ? " · System" : "")
+                  text: row.modelData.address
                   font.pixelSize: Style.font.bodySmall
                   color: Qt.darker(Color.foreground, 1.4)
                 }
@@ -402,7 +403,6 @@ Panel {
 
               Row {
                 id: actions
-                visible: !row.modelData.protected
                 Layout.alignment: Qt.AlignVCenter
                 spacing: Style.space(2)
                 ToggleSwitch {

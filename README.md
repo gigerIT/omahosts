@@ -15,7 +15,7 @@ omarchy plugin add https://github.com/gigerit/omahosts.git --enable
 omarchy bar move gigerit.omahosts --after omarchy.network
 ```
 
-Open the hosts icon next to Network. Each Save, toggle, or confirmed Delete requests administrator authentication. Cancelling authentication keeps the original file and any draft. Localhost mappings are read-only; other loopback mappings such as `127.0.0.1 app.test` are editable.
+Open the hosts icon next to Network. Each Save, toggle, or confirmed Delete requests administrator authentication. Cancelling authentication keeps the original file and any draft. Default localhost mappings are hidden and protected; other loopback mappings such as `127.0.0.1 app.test` remain visible and editable.
 
 Hostnames are separated by spaces. Addresses can be IPv4 or IPv6. International hostnames must use punycode. Duplicate enabled names within the same address family are marked in the list; an IPv4 and IPv6 mapping for the same name is normal. Groups, wildcard domains, and DNS server configuration are not supported.
 
