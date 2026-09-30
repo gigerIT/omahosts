@@ -91,3 +91,7 @@ After publication, set the installed checkout's origin to `https://github.com/gi
 If QML changes remain cached after `omarchy-shell shell rescanPlugins`, use `omarchy restart shell` to load a fresh copy.
 
 Use the installed `qs.Ui` controls and `qs.Commons` theme tokens. Verify visual changes in the running shell, including keyboard focus and authentication cancellation. Do not edit packaged Omarchy files. The privileged CLI accepts only `read`, `check`, and `apply`, with fixed system paths; tests pass temporary paths to the Python functions directly. Keep test-only path overrides out of the privileged CLI.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

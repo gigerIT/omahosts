@@ -4,6 +4,7 @@
   "name": "omahosts",
   "version": "0.1.0",
   "author": "gigerit",
+  "license": "MIT",
   "description": "Manage local hosts entries from the Omarchy bar",
   "kinds": ["bar-widget"],
   "entryPoints": { "barWidget": "Panel.qml" },
